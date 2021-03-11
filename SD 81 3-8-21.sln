@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conditionals", "Conditional
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopExamples", "LoopExamples\LoopExamples.csproj", "{4E9440D8-563C-44FE-944E-4BDDA8F18AEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morning Challenge W1D3", "Morning Challenge W1D3\Morning Challenge W1D3.csproj", "{03B0C15A-12B2-4684-9F93-87B24938FF58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningChallenges", "Morning Challenge W1D3\MorningChallenges.csproj", "{03B0C15A-12B2-4684-9F93-87B24938FF58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{DA2F2667-DD52-4A85-AE1B-1A18C2CCBA59}"
 EndProject
