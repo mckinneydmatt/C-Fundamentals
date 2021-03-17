@@ -49,10 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="W1D3 Morning Challenge.cs" />
+    <Compile Include="W1D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="W2D2 Morning Challenge.cs" />
+    <Compile Include="Calculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

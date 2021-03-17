@@ -18,7 +18,7 @@ namespace StreamingContent_Inheritance
             //to find a specific show
             foreach (StreamingContent content in _contentDirectory)
             {
-                if (content.Title.ToLower() == title.ToLower() && content.GetType() == typeof(Show)) 
+                if (content.Title.ToLower() == title.ToLower() && content.GetType() == typeof(Show))
                 {
                     return (Show)content;
                 }
@@ -41,6 +41,9 @@ namespace StreamingContent_Inheritance
 
             return null;
         }
+
+
+
 
         //Read get all
         public List<Show> GetAllShows()
@@ -72,7 +75,36 @@ namespace StreamingContent_Inheritance
             }
 
             return allMovies;
+        }
 
+        public List<Movie> GetMovieByRuntime(double runTime)
+        {
+            List<Movie> moviesByRunTime = new List<Movie>();
+
+            foreach (Movie content in _contentDirectory)
+            {
+                if (runTime == content.RunTime && content is Movie)
+                {
+                    return moviesByRunTime;
+                }
+
+            }
+           return null;
+        }
+
+        public List<Show> GetShowByEpisodes(int episodeCount)
+        {
+            List<Show> showByEpisodes = new List<Show>();
+
+            foreach (Show content in _contentDirectory)
+            {
+                if (episodeCount == content.EpisodeCount && content is Show)
+                {
+                    return showByEpisodes;
+                }
+
+            }
+            return null;
         }
 
         //get by other parameters, such as runtime/avg runtime,shows with over x episodes, get shows or movie by rating
