@@ -71,7 +71,7 @@ namespace StreamingContentConsole
             Console.WriteLine("Please enter a description:");
             content.Description = Console.ReadLine();
 
-            Console.WriteLine("Please enter a star rating (1-5):");
+            Console.WriteLine("Please enter a star rating (1-10):");
             content.StarRating = double.Parse(Console.ReadLine());
 
             Console.WriteLine("Select a Maturity Rating:\n" +
@@ -226,10 +226,12 @@ namespace StreamingContentConsole
             StreamingContent rubber = new StreamingContent("Rubber", "Tire comes to life and kills people.", MaturityRating.R, GenreType.Drama, 5.8);
             StreamingContent toystory = new StreamingContent("Toy Story", "Best childhood movie", MaturityRating.G, GenreType.Bromance, 10.0d);
             StreamingContent starwars = new StreamingContent("Star Wars", "Jar Jar saves the world.", MaturityRating.PG_13, GenreType.SciFi, 9.2);
+            StreamingContent snowden = new StreamingContent("Snowden", "Our first real date.", MaturityRating.R, GenreType.Drama, 10);
 
             _streamingRepo.AddContentToDirectory(rubber);
             _streamingRepo.AddContentToDirectory(toystory);
             _streamingRepo.AddContentToDirectory(starwars);
+            _streamingRepo.AddContentToDirectory(snowden);
 
 
 

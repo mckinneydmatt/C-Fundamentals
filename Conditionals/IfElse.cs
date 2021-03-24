@@ -16,7 +16,7 @@ namespace Conditionals
             }
 
             int hoursSpentStudying = 1;
-            if (hoursSpentStudying < 16) ;
+            if (hoursSpentStudying < 16)
             {
                 Console.WriteLine("Are you even trying");
             }
