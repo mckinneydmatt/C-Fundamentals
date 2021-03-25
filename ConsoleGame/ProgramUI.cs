@@ -31,7 +31,7 @@ namespace ConsoleGame
                         DungeonBegin();
                         break;
                     default:
-                        continueToRun = false;
+                        RunMenu();
                         break;
 
                 }
@@ -94,30 +94,7 @@ namespace ConsoleGame
 
             if (animalAnswer == "lion")
             {
-                Console.Clear();
-                Console.WriteLine("You enter the lion door, hoping to not see the creature depicted. But no such luck. \n" +
-                    "As you enter a large, circular room, you see the next door - a heavy, stone door with a gold star on it. \n" +
-                    "But between you and that door is a roaring lion. It looks hungry.");
-                Console.ReadKey();
-                Console.WriteLine("Should you FIGHT the lion, or turn BACK to the previous room?");
-                Console.WriteLine("FIGHT or BACK");
-                string lionFight = Console.ReadLine().ToLower();
-                if (lionFight == "fight")
-                {
-                    Console.Clear();
-                    Console.WriteLine("You charge the lion, armed with only the fire from your lantern. It holds its ground and takes a swipe at your chest, breaking the skin.\n" +
-                        "You bring your lantern down on its head, disorienting it long enough to hurry through the door.");
-                    playerHealth = playerHealth - 40;
-                    Console.WriteLine($"Health: {playerHealth}/100 ");
-                    Console.ReadKey();
-                    StarRoom();
-                }
-                else if (lionFight == "back")
-                {
-                    Console.Clear();
-                    Console.WriteLine("You turn back to the last room as the lion starts to charge. You shut the door just in time, leaving what was behind the next door a mystery forever.");
-                    DungeonLeftTwo();
-                }
+                LionRoom();
 
             }
             else if (animalAnswer == "rat")
@@ -128,7 +105,43 @@ namespace ConsoleGame
             {
                 SnakeRoom();
             }
+            else
+            {
+                DungeonLeft();
+            }
 
+        }
+
+        private void LionRoom()
+        {
+            Console.Clear();
+            Console.WriteLine("You enter the lion door, hoping to not see the creature depicted. But no such luck. \n" +
+                "As you enter a large, circular room, you see the next door - a heavy, stone door with a gold star on it. \n" +
+                "But between you and that door is a roaring lion. It looks hungry.");
+            Console.WriteLine("Should you FIGHT the lion, or turn BACK to the previous room?");
+            Console.WriteLine("FIGHT or BACK");
+            string lionFight = Console.ReadLine().ToLower();
+            if (lionFight == "fight")
+            {
+                Console.Clear();
+                Console.WriteLine("You charge the lion, armed with only the fire from your lantern. It holds its ground and takes a swipe at your chest, breaking the skin.\n" +
+                    "You bring your lantern down on its head, shattering your tool and disorienting the lion long enough to hurry through the door.");
+                hasLantern = false;
+                playerHealth = playerHealth - 40;
+                Console.WriteLine($"Health: {playerHealth}/100 ");
+                Console.ReadKey();
+                StarRoom();
+            }
+            else if (lionFight == "back")
+            {
+                Console.Clear();
+                Console.WriteLine("You turn back to the last room as the lion starts to charge. You shut the door just in time, leaving what was behind the next door a mystery forever.");
+                DungeonLeftTwo();
+            }
+            else
+            {
+                LionRoom();
+            }
         }
 
         private void RatRoom()
@@ -144,8 +157,10 @@ namespace ConsoleGame
             Console.WriteLine("Press any key to begin your search.");
             Console.ReadKey();
             Console.Clear();
-
-
+            RatSearch();
+        }
+        private void RatSearch()
+        {
             Console.WriteLine("Looking around the room, you see a few options that could hide the key.");
             Console.WriteLine("Which location will you search - the dead rat, a cupboard on the left, a cupboard on the right, \n" +
                 "somewhere on the floor, or in a drawer you notice?");
@@ -154,6 +169,7 @@ namespace ConsoleGame
                 "3. Cupboard right\n" +
                 "4. Floor\n" +
                 "5. Drawer");
+            Console.WriteLine("Enter the number for the location you want to search.");
 
             string[] searchOptions = { "rat", "cupboard left", "cupboard right", "floor", "drawer" };
             Random rand = new Random();
@@ -217,16 +233,14 @@ namespace ConsoleGame
                     Console.WriteLine("You pull open the drawer, hoping to find a key to the door to continue. Yes! You grab the key for the next room.\n" +
                         "You unlock the door and continue, hoping to soon find an end to this cursed place.");
                     MoonRoom();
-
+                }
+                else
+                {
+                    RatSearch();
                 }
 
 
             }
-
-
-
-
-
 
         }
 
@@ -348,6 +362,10 @@ namespace ConsoleGame
             {
                 SnakeRoom();
             }
+            else
+            {
+                DungeonLeftTwo();
+            }
 
         }
 
@@ -374,6 +392,8 @@ namespace ConsoleGame
                         "You enter the door behind the table, ready to face what's next.");
                     playerHealth = playerHealth + 20;
                     Console.WriteLine($"Health: {playerHealth}/100 ");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
                     MoonRoom();
                     break;
                 case "2":
@@ -383,6 +403,8 @@ namespace ConsoleGame
                         "You enter the door behind the table, hoping that was the last surprise you see.");
                     playerHealth = playerHealth - 10;
                     Console.WriteLine($"Health: {playerHealth}/100 ");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
                     MoonRoom();
                     break;
                 case "3":
@@ -390,6 +412,9 @@ namespace ConsoleGame
                     Console.WriteLine("The voice bellows at you after you say your answer: 'Did you really think it was that?'");
                     Console.WriteLine("The chest opens, but it's empty. Suddenly, you feel the ground beneath you crumble as you fall into an awaiting spike pit.");
                     playerHealth = playerHealth - 100;
+                    break;
+                default:
+                    StarRoom();
                     break;
             }
         }
@@ -407,6 +432,8 @@ namespace ConsoleGame
                     "All the stars go dark, except a select few.\n" +
                     "Thanks to your lantern, you can make out what shape it is.");
                 System.Diagnostics.Process.Start("https://www.pixelsbin.com/images/2021/03/24/constellation_light42d3a466ace24c73.jpg");
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
                 ConstellationPuzzle();
             }
             else
@@ -416,6 +443,8 @@ namespace ConsoleGame
                     "A select few stars light up, but they're very faint. You can barely make out what it is.\n" +
                     "You really wish you had that lantern.");
                 System.Diagnostics.Process.Start("https://www.pixelsbin.com/images/2021/03/24/constellation2c4afbda0257a43a.jpg");
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
                 ConstellationPuzzle();
             }
         }
@@ -461,13 +490,49 @@ namespace ConsoleGame
                     ConstellationPuzzle();
                     break;
             }
-                
+
 
         }
 
         private void SlidingRoom()
         {
-
+            Console.Clear();
+            Console.WriteLine("As you walk into the room, you notice a door, and feel a strange warmth beneath your feet.\n" +
+                "As you begin to approach your escape, you are stopped by a booming voice.");
+            Console.WriteLine("\"Not Quite, Traveler! it exclaims. If you wish to be free of my dungeon, you must first answer my riddle.\n" +
+                "Beware, disappoint me and you shall meet your end!\"");
+            Console.WriteLine("What is the creature that walks on four legs in the morning, two legs at noon and three in the evening?\n" +
+                "1: A Falcon\n" +
+                "2: A Human\n" +
+                "3: An Ape");
+            Console.WriteLine("Choose Wisely, Traveler!");
+            Console.WriteLine("Choose the number for your answer: 1, 2 or 3");
+            string exitAnswer = Console.ReadLine();
+            switch (exitAnswer)
+            {
+                case "1":
+                    Console.WriteLine("'Mmmm, most dissapointing.' You hear the voice exclaim, with what seems to be a hint of melancholy?\n" +
+                        "The floor beneath you quickly slides away, and you let out a shrill screech as you drop into the molten magma below.");
+                    playerHealth = playerHealth - 100;
+                    break;
+                case "2":
+                    Console.WriteLine("Oh ho! the voice exclaims with excitement. 'You must be quite clever! I suppose you will get to live another day. Enjoy your freedom, Traveler'\n" +
+                        "You hear a 'click' come from the door, and find it unlocked.\n" +
+                        "You feel a gust of wind brush against your face as you open the door\n" +
+                        "Finally! the exit to the dungeon!");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                    gameWin = true;
+                    break;
+                case "3":
+                    Console.WriteLine("'Mmmm, most dissapointing.' You hear the voice exclaim, with what seems to be a hint of melancholy?\n" +
+                        "The floor beneath you quickly slides away, and you let out a shrill screech as you drop into the molten magma below.");
+                    playerHealth = playerHealth - 100;
+                    break;
+                default:
+                    SlidingRoom();
+                    break;
+            }
         }
 
         private void DungeonRight()
@@ -475,8 +540,6 @@ namespace ConsoleGame
             Console.Clear();
 
             Console.WriteLine("You choose the right path, hoping it leads to success and freedom from the dungeon.");
-
-            Console.Clear();
 
             Console.WriteLine("After walking for a bit, you come across a wide gap, with a small ledge along the side. Do you try and jump the gap, or maneuver around it on the ledge?");
 
@@ -488,9 +551,11 @@ namespace ConsoleGame
 
             if (gapAnswer == "jump")
             {
-                Console.WriteLine("You get a running start, and leap with everything you have. Immediately, you realize you're not going to make it. \n" +
+                Console.WriteLine("You get a running start, and leap with everything you have. \n" +
+                    "Immediately, you realize you're not going to make it. \n" +
                     "You try and grab at anything to keep from falling through the gap, but it's no use. \n" +
-                    "You fall into the pit, splashing down into an underground reservoir.");
+                    "You fall into the pit, splashing down into an underground reservoir.\n" +
+                    "As you get your bearings, you notice your lantern is soaked. It's completely useless now.");
                 playerHealth = playerHealth - 20;
                 Console.WriteLine($"Health: {playerHealth}/100 ");
                 Console.WriteLine("Press any key to continue");
@@ -502,7 +567,13 @@ namespace ConsoleGame
             {
                 Console.WriteLine("Your heart beats in your chest as you carefully step your way across the gap to the other side.\n" +
                     "You look down at what could've been your fate had you fallen, but only seeing darkness.");
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
                 Hangman();
+            }
+            else
+            {
+                DungeonRight();
             }
 
         }
@@ -529,6 +600,8 @@ namespace ConsoleGame
                 Console.Clear();
                 Console.WriteLine("You make your way up the rocks to the other side of the gap.");
                 Hangman();
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
             }
             else if (waterAnswer == "swim")
             {
@@ -545,110 +618,73 @@ namespace ConsoleGame
 
         private void Hangman()
         {
+            Console.Clear();
+
             if (hasLantern == true)
             {
-                Console.WriteLine("You walk into the next room with a wide, stone wall in front of you. You notice the wall has eight square chunks missing.\n" +
+                Console.WriteLine("You walk into the next room with a wide, stone wall in front of you. You notice the wall has three chunks missing.\n" +
                     "What could those be for?\n" +
                     "On your left, you see stone squares, each with letters on them. They look like they fit in the chunks in the wall.\n" +
-                    "As you move closer to the missing spots in the wall, you make out the faint indentation of a letter on the fourth spot.\n" +
-                    "Luckily you have your lantern to help you see."
-                //"It is a G.\n" +
-                //"_ _ _ G _ _ _ _");
-                //CAT
-                );
+                    "As you move closer to the missing spots in the wall, you make out the faint indentation of a letter on the second spot.\n" +
+                    "Luckily you have your lantern to help you see.\n" +
+                    "It's an A.\n" +
+                    "You need to spell the word on the wall to move on.\n" +
+                    "The letters are:\n" +
+                    "A\n" +
+                    "B\n" +
+                    "C\n" +
+                    "E\n" +
+                    "S\n" +
+                    "R\n" +
+                    "T\n" +
+                    "S\n" +
+                    "V");
 
-                bool hasA = false;
-                bool hasC = false;
-                bool hasT = false;
-                string cat = "cat";
-                Console.WriteLine("What letter should you try?");
-                char hangmanGuess = char.Parse(Console.ReadLine().ToLower());
+                Console.WriteLine("You find a written clue on the ground - \"I have fur, but I'm not a coat.\"");
 
+                Console.WriteLine("What three-letter word should you try?");
 
-                if (cat.Contains(hangmanGuess))
+                for (int guesses = 0; guesses < 50; guesses++)
                 {
-                    Console.WriteLine("You got a letter!");
+                    string hangmanGuess = Console.ReadLine().ToLower();
 
-                }
-
-
-
-                for (int i = 0; i < 555; i++)
-                {
-
-                    if (hangmanGuess == 'c' && hasT == false && hasA == false)
+                    if (hangmanGuess == "cat" && guesses == 0)
                     {
-                        Console.WriteLine("Yes, you got a letter!\n" +
-                            "C _ _");
-                        hasC = true;
+                        Console.WriteLine("Wow! Got it on the first try!");
+                        Console.WriteLine("A wall opens up, revealing stairs that lead beneath the dungeon. It doesn't look promising, but it's your only path forward right now.\n" +
+                            "You walk down the stairs, and into what smells like a sewer.");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
                     }
-                    else if (hangmanGuess == 'c' && hasT == false && hasA == true)
+                    else if (hangmanGuess == "cat" && guesses > 0)
                     {
-                        Console.WriteLine("Yes, you got another letter!\n" +
-                               "C A _");
-                        hasC = true;
-
+                        Console.WriteLine("Got it!");
+                        Console.WriteLine("A wall opens up, revealing stairs that lead beneath the dungeon. It doesn't look promising, but it's your only path forward right now.\n" +
+                            "You walk down the stairs, and into what smells like a sewer.");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
                     }
-                    else if (hangmanGuess == 'c' && hasT == true && hasA == false)
+                    else if (hangmanGuess != "cat" && guesses == 0)
                     {
-                        Console.WriteLine("Yes, you got another letter!\n" +
-                               "C _ T");
-                        hasC = true;
-
+                        Console.WriteLine("Nothing happens. That must not have been the right answer.\n" +
+                            "You look around, and find another clue - \"I have claws but I’m not a bird.\"");
                     }
-                    else if (hangmanGuess == 'c' && hasT == true && hasA == true)
+                    else if (hangmanGuess != "cat" && guesses == 1)
                     {
-                        Console.WriteLine("You got it!");
-                        Console.WriteLine("C A T");
+                        Console.WriteLine("Nothing happens. That must not have been the right answer.\n" +
+                            "You look around, and find another clue - \"I like to climb trees but I’m not a child\"");
+                        Console.WriteLine("You get the feeling this will be your last chance.");
                     }
-                    else if (hangmanGuess == 'a' && hasT == false && hasC == false)
+                    else if (hangmanGuess != "cat" && guesses == 2)
                     {
-                        Console.WriteLine("Yes, you got a letter!\n" +
-                                   "_ A _");
-                        hasA = true;
+                        Console.WriteLine("Suddenly the ground beneath you crumbles, and you begin to fall.");
+                        Console.WriteLine("You fall into a chasm, landing on sand below, but slightly injured.");
+                        playerHealth = playerHealth - 20;
+                        Console.WriteLine($"Health: {playerHealth}/100 ");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                        QuicksandRoom();
                     }
-                    else if (hangmanGuess == 'a' && hasT == false && hasC == true)
-                    {
-                        Console.WriteLine("Yes, you got another letter!\n" +
-                                "C A _");
-                        hasA = true;
-
-                    }
-                    else if (hangmanGuess == 'a' && hasT == true && hasC == false)
-                    {
-                        Console.WriteLine("Yes, you got another letter!\n" +
-                                "_ A T");
-                        hasA = true;
-                    }
-                    else if (hangmanGuess == 'a' && hasT == true && hasC == true)
-                    {
-                        Console.WriteLine("You got it!");
-                        Console.WriteLine("C A T");
-                    }
-                    else if (hangmanGuess == 't' && hasA == false && hasC == false)
-                    {
-                        Console.WriteLine("Yes, you got a letter!\n" +
-                                   "_ _ T");
-                        hasT = true;
-                    }
-                    else if (hangmanGuess == 't' && hasA == false && hasC == true)
-                    {
-                        Console.WriteLine("Yes, you got a letter!\n" +
-                                   "C _ T");
-                        hasT = true;
-                    }
-                    else if (hangmanGuess == 't' && hasA == true && hasC == false)
-                    {
-                        Console.WriteLine("Yes, you got a letter!\n" +
-                                   "_ A T");
-                        hasT = true;
-                    }
-                    else if (hangmanGuess == 't' && hasA == true && hasC == true)
-                    {
-                        Console.WriteLine("You got it!");
-                        Console.WriteLine("C A T");
-                    }
-
 
 
                 }
@@ -656,6 +692,74 @@ namespace ConsoleGame
 
 
 
+            }
+
+            if (hasLantern != true)
+            {
+                Console.WriteLine("You walk into the next room with a wide, stone wall in front of you. You notice the wall has three chunks missing.\n" +
+                    "What could those be for?\n" +
+                    "On your left, you see stone squares, each with letters on them. They look like they fit in the chunks in the wall.\n" +
+                    "As you move closer to the missing spots in the wall, you make out the faint indentation of a letter on the second spot.\n" +
+                    "If only you still had your lantern to help you see the missing letter.\n" +
+                    "You need to spell the word on the wall to move on.\n" +
+                    "The letters are:" +
+                    "A\n" +
+                    "B\n" +
+                    "C\n" +
+                    "E\n" +
+                    "S\n" +
+                    "R\n" +
+                    "T\n" +
+                    "S\n" +
+                    "V");
+
+                Console.WriteLine("You find a written clue on the ground - \"I have fur, but I'm not a coat.\"");
+
+                Console.WriteLine("What three-letter word should you try?");
+
+                for (int guesses = 0; guesses < 50; guesses++)
+                {
+                    string hangmanGuess = Console.ReadLine().ToLower();
+
+                    if (hangmanGuess == "cat" && guesses == 0)
+                    {
+                        Console.WriteLine("Wow! Got it on the first try!");
+                        Console.WriteLine("A wall opens up, revealing stairs that lead beneath the dungeon. It doesn't look promising, but it's your only path forward right now.\n" +
+                            "You walk down the stairs, and into what smells like a sewer.");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                    }
+                    else if (hangmanGuess == "cat" && guesses > 0)
+                    {
+                        Console.WriteLine("Got it!");
+                        Console.WriteLine("A wall opens up, revealing stairs that lead beneath the dungeon. It doesn't look promising, but it's your only path forward right now.\n" +
+                            "You walk down the stairs, and into what smells like a sewer.");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                    }
+                    else if (hangmanGuess != "cat" && guesses == 0)
+                    {
+                        Console.WriteLine("Nothing happens. That must not have been the right answer.\n" +
+                            "You look around, and find another clue - \"I have claws but I’m not a bird.\"");
+                    }
+                    else if (hangmanGuess != "cat" && guesses == 1)
+                    {
+                        Console.WriteLine("Nothing happens. That must not have been the right answer.\n" +
+                            "You look around, and find another clue - \"I like to climb trees but I’m not a child\"");
+                        Console.WriteLine("You get the feeling this will be your last chance.");
+                    }
+                    else if (hangmanGuess != "cat" && guesses == 2)
+                    {
+                        Console.WriteLine("Suddenly the ground beneath you crumbles, and you begin to fall.");
+                        Console.WriteLine("You fall into a chasm, landing on sand below, but slightly injured.");
+                        playerHealth = playerHealth - 20;
+                        Console.WriteLine($"Health: {playerHealth}/100 ");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                    }
+
+
+                }
             }
         }
 
@@ -679,12 +783,16 @@ namespace ConsoleGame
                 Console.ReadKey();
                 playerHealth = playerHealth - 100;
             }
+            else
+            {
+                Swim();
+            }
         }
 
         private void Sewers()
         {
             Console.Clear();
-            Console.WriteLine("You crawl up the hatch and find yourself in what seems to be an underground drainage pipe. \n" +
+            Console.WriteLine("You find yourself in what seems to be an underground drainage pipe. \n" +
                 "Overwhelmed by the stench of waste and rot, you begin to violently gag as you work your way through the pipe.");
             playerHealth = playerHealth - 10;
             Console.WriteLine($"Health: {playerHealth}/100");
@@ -706,8 +814,12 @@ namespace ConsoleGame
                 Console.WriteLine("Press any key to continue.");
                 Console.ReadKey();
                 gameWin = true;
-
-
+            }
+            else
+            {
+                Console.WriteLine("You need to make a decision.\n" +
+                    "As you think about it, you begin to feel worse and worse from the smell.");
+                Sewers();
             }
         }
 
@@ -727,12 +839,6 @@ namespace ConsoleGame
 // traps that reset the game, sending player back to start spot
 // (Maybe) health for player with basic combat??
 //
-//"Gasping for air, you emerge in a small open pocket deep underground. Looking around, you spot a strange hatch leading up."
-
-//
-//        like "You feel a pain in your thigh, and notice an small dart sticking out of it. -10 health."
-//"You walk into the chamber, and a rat jumps on your leg, managing to take a small chunk out before you can kick it away. -10 health"
-
 //
 //
 //
